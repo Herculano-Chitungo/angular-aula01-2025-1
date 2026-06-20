@@ -7,6 +7,17 @@
     <b>Cliente</b>: {{cliente.nome | uppercase}}
   </div>
   <div>
-    <b>Saldo</b>: {{cliente.saldo | currency}}
+    <b>Saldo</b>:
+    <span [class]="cliente.saldo | classPorValor">
+      {{cliente.saldo | currency}}
+    </span>
   </div>
+  @if (cliente.creditoPreAprovado > 0) {
+    <div>
+      <b>Crédito pré-aprovado</b>:
+      <span [class]="cliente.creditoPreAprovado | classPorValor">
+        {{cliente.creditoPreAprovado | currency}}
+      </span>
+    </div>
+  }
 </header>

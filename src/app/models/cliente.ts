@@ -7,4 +7,11 @@ export class Cliente {
   ){
   }
 
+  public get creditoPreAprovado(): number {
+    if (this.saldo >= 50) {
+      return 100;
+    }
+    return 0;
+  }
+
 }

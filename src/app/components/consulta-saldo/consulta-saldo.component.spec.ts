@@ -11,7 +11,7 @@ describe('ConsultaSaldoComponent', () => {
       imports: [ConsultaSaldoComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ConsultaSaldoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +20,5 @@ describe('ConsultaSaldoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
