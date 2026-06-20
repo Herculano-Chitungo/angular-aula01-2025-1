@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Cliente } from '../../models/cliente';
+import { ClassPorValorPipe } from '../../pipes/class-por-valor.pipe';
 
 @Component({
   selector: 'app-consulta-saldo',
   standalone: true,
   imports: [
     CommonModule,
+    ClassPorValorPipe,
   ],
   templateUrl: './consulta-saldo.component.html',
   styleUrl: './consulta-saldo.component.css',
@@ -19,15 +21,5 @@ export class ConsultaSaldoComponent {
     99.99,
     new Date(),
   );
-
-  public classPorValor(valor: number): string {
-    if (+valor.toFixed(2) > 0) {
-      return 'positivo';
-    } else if (+valor.toFixed(2) < 0) {
-      return 'negativo';
-    } else {
-      return '';
-    }
-  }
 
 }

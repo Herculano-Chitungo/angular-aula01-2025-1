@@ -8,8 +8,16 @@
   </div>
   <div>
     <b>Saldo</b>:
-    <span [class]="classPorValor(cliente.saldo)">
+    <span [class]="cliente.saldo | classPorValor">
       {{cliente.saldo | currency}}
     </span>
   </div>
+  @if (cliente.creditoPreAprovado > 0) {
+    <div>
+      <b>Crédito pré-aprovado</b>:
+      <span [class]="cliente.creditoPreAprovado | classPorValor">
+        {{cliente.creditoPreAprovado | currency}}
+      </span>
+    </div>
+  }
 </header>
