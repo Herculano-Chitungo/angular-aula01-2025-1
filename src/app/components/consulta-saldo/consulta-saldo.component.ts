@@ -20,4 +20,14 @@ export class ConsultaSaldoComponent {
     new Date(),
   );
 
+  public classPorValor(valor: number): string {
+    if (+valor.toFixed(2) > 0) {
+      return 'positivo';
+    } else if (+valor.toFixed(2) < 0) {
+      return 'negativo';
+    } else {
+      return '';
+    }
+  }
+
 }

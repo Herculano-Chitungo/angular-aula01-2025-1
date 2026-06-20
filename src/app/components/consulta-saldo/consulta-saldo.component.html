@@ -7,6 +7,9 @@
     <b>Cliente</b>: {{cliente.nome | uppercase}}
   </div>
   <div>
-    <b>Saldo</b>: {{cliente.saldo | currency}}
+    <b>Saldo</b>:
+    <span [class]="classPorValor(cliente.saldo)">
+      {{cliente.saldo | currency}}
+    </span>
   </div>
 </header>
