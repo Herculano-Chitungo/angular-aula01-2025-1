@@ -1,0 +1,12 @@
+<h1>Consulta Saldo</h1>
+<header>
+  <div class="atenuado">
+    Último login: {{cliente.ultimoLogin | date}}
+  </div>
+  <div>
+    <b>Cliente</b>: {{cliente.nome | uppercase}}
+  </div>
+  <div>
+    <b>Saldo</b>: {{cliente.saldo | currency}}
+  </div>
+</header>
