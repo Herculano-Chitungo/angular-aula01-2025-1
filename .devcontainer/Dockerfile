@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye
 
-# Install MongoDB command line tools - though mongo-database-tools not available on arm64
+# Install MongoDB command line tools
 ARG MONGO_TOOLS_VERSION=6.0
 RUN . /etc/os-release \
     && curl -sSL "https://www.mongodb.org/static/pgp/server-${MONGO_TOOLS_VERSION}.asc" | gpg --dearmor > /usr/share/keyrings/mongodb-archive-keyring.gpg \
@@ -10,29 +10,21 @@ RUN . /etc/os-release \
     && if [ "$(dpkg --print-architecture)" = "amd64" ]; then apt-get install -y mongodb-database-tools; fi \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# [Optional] Uncomment if you want to install an additional version of node using nvm
-# ARG EXTRA_NODE_VERSION=10
-# RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
+# Configurações de Shell Completion
+RUN echo "source /usr/share/bash-completion/completions/git" >> /etc/bash.bashrc \
+    && echo "source <(npm completion)" >> /etc/bash.bashrc \
+    && echo "source <(node --completion-bash)" >> /etc/bash.bashrc
 
-# Loads Git's bash-completion script:
-RUN echo "source /usr/share/bash-completion/completions/git" >> /etc/bash.bashrc
+# Instala Angular CLI
+RUN su node -c "npm install -g @angular/cli@17" \
+    && echo "source <(ng completion script)" >> /etc/bash.bashrc
 
-# Loads NPM's bash-completion script:
-RUN echo "source <(npm completion)" >> /etc/bash.bashrc
-
-# Loads Node's bash-completion script:
-RUN echo "source <(node --completion-bash)" >> /etc/bash.bashrc
-
-# Installs global node modules:
-RUN su node -c "npm install -g @angular/cli@17"
-
-# Loads Angular's bash-completion script:
-RUN echo "source <(ng completion script)" >> /etc/bash.bashrc
-
-# Installs OS packages:
-RUN echo "Instalando pacotes sobre o Debian..." \
+# Instala Navegadores e pacotes de SO
+RUN echo "Instalando navegadores e pacotes..." \
     && apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends chromium \
-    && echo "Pacotes de SO instalados com sucesso!"
+    && apt-get -y install --no-install-recommends chromium firefox-esr \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
+# Define variáveis de ambiente para os binários
 ENV CHROME_BIN=/usr/bin/chromium
+ENV FIREFOX_BIN=/usr/bin/firefox-esr

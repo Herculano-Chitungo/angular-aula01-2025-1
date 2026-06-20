@@ -39,7 +39,8 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: [
-      'FirefoxHeadless',
+      'ChromeHeadlessNoSandbox',
+      'FirefoxHeadless'
     ],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
@@ -48,6 +49,10 @@ module.exports = function (config) {
           "--no-sandbox",
           "--disable-setuid-sandbox",
         ],
+      },
+      FirefoxHeadless: {
+        base: 'Firefox',
+        flags: ['-headless'],
       },
     },
     singleRun: false,
